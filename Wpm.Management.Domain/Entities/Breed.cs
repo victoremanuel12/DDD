@@ -1,0 +1,16 @@
+﻿namespace Wpm.Management.Domain.Entities
+{
+    public class Breed : Entity
+    {
+        public string Name { get; init; }
+        public WeightRange FemaleIdealWeight { get; init; }
+        public WeightRange MaleIdealWeight { get; init; }
+        public Breed(Guid id, string name, WeightRange femaleIdealWeight, WeightRange maleIdealWeight)
+        {
+            Id = id;
+            Name = name;
+            FemaleIdealWeight = femaleIdealWeight;
+            MaleIdealWeight = maleIdealWeight;
+        }
+    }
+}
