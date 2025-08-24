@@ -1,6 +1,4 @@
-﻿using System.Runtime.Intrinsics.X86;
-
-namespace Wpm.Management.Domain.Entities
+﻿namespace Wpm.SharedKernel.ValueObjects
 {
     public record Weight
     {
