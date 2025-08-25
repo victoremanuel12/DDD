@@ -6,6 +6,8 @@ namespace Wpm.Clinic.Domain.Entities
 {
     public class Consultation : AggregateRoot
     {
+        private readonly List<DrugAdministration> administratedDrugs = new();
+        private readonly List<VitalSigns> vitalSignsReadings = new();
         public DateTime StartedAt { get; init; }
         public DateTime EndedAt { get; private set; }
         public Text Diagnosis { get; private set; }
@@ -13,6 +15,8 @@ namespace Wpm.Clinic.Domain.Entities
         public PatiendId PatiendId { get; init; }
         public Weight CurrentWeight { get; private set; }
         public ConsultationStatus Status { get; set; }
+        public IReadOnlyCollection<DrugAdministration> AdministrateredDrugs => administratedDrugs;
+        public IReadOnlyCollection<VitalSigns> VitalSignsReadings => vitalSignsReadings;
         public Consultation(Text diagnosis,
             Text treatment,
             PatiendId patiendId,
@@ -55,6 +59,19 @@ namespace Wpm.Clinic.Domain.Entities
             {
                 throw new InvalidOperationException("The consultations is already closed");
             }
+        }
+
+        public void AdministerDrug(DrugId drugId, Dose dose)
+        {
+            ValidateConsultationStatus();
+            var newDrugAdministration = new DrugAdministration(drugId, dose);
+            administratedDrugs.Add(newDrugAdministration);
+
+        }
+        public void RegisterVitalSigns(IEnumerable<VitalSigns> vitalSigns)
+        {
+            ValidateConsultationStatus();
+            vitalSignsReadings.AddRange(vitalSigns);
         }
     }
 }
