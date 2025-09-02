@@ -6,7 +6,7 @@ namespace Wpm.Clinic.Domain.ValueObjects
         public string Value { get; init; }
         public Text(string value)
         {
-            Validate(Value);
+            Validate(value);
             Value = value;
         }
 

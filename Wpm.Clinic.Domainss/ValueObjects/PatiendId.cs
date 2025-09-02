@@ -13,7 +13,7 @@
 
         private void Validate(Guid id)
         {
-            if (Id == Guid.Empty)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException("PatiendId", "The identifier is not valid");
 

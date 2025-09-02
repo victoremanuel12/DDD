@@ -9,22 +9,19 @@ namespace Wpm.Clinic.Domain.Entities
         private readonly List<DrugAdministration> administratedDrugs = new();
         private readonly List<VitalSigns> vitalSignsReadings = new();
         public DateTime StartedAt { get; init; }
-        public DateTime EndedAt { get; private set; }
+        public DateTime? EndedAt { get; private set; }
         public Text Diagnosis { get; private set; }
         public Text Treatment { get; private set; }
         public PatiendId PatiendId { get; init; }
         public Weight CurrentWeight { get; private set; }
-        public ConsultationStatus Status { get; set; }
+        public ConsultationStatus Status { get; private set; }
         public IReadOnlyCollection<DrugAdministration> AdministrateredDrugs => administratedDrugs;
         public IReadOnlyCollection<VitalSigns> VitalSignsReadings => vitalSignsReadings;
-        public Consultation(Text diagnosis,
-            Text treatment,
-            PatiendId patiendId,
-            ConsultationStatus status)
+        public Consultation(PatiendId patiendId)
         {
             Id = Guid.NewGuid();
             PatiendId = patiendId;
-            Status = status;
+            Status = ConsultationStatus.Open;
             StartedAt = DateTime.UtcNow;
         }
         public void SetWheight(Weight weight)
@@ -40,7 +37,7 @@ namespace Wpm.Clinic.Domain.Entities
         public void SetTreatment(Text treatment)
         {
             ValidateConsultationStatus();
-            Diagnosis = treatment;
+            Treatment = treatment;
         }
         public void End()
         {
