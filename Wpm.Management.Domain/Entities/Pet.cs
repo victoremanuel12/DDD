@@ -10,7 +10,7 @@ namespace Wpm.Management.Domain
     {
         public string Name { get; init; }
         public int Age { get; init; }
-        public Weight Weight { get; private set; }
+        public Weight? Weight { get; private set; }
 
         public WeihgtClass WeightClass { get; private set; }
         public string Color { get; set; }

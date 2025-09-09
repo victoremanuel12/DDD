@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -8,11 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8" />
-    <PackageReference Include="Scalar.AspNetCore.Microsoft" Version="2.7.2" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Wpm.Infra.IoCc\Wpm.Infra.IoC.csproj" />
+    <ProjectReference Include="..\Wpm.Management.Application\Wpm.Management.Application.csproj" />
   </ItemGroup>
 
 </Project>
