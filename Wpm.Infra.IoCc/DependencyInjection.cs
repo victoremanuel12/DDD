@@ -4,7 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wpm.Infra.Data;
 using Wpm.Infra.Data.Repository;
+using Wpm.Infra.Data.Services;
+using Wpm.Management.Application.Commands;
+using Wpm.Management.Application.Handler;
+using Wpm.Management.Application.Services;
 using Wpm.Management.Domain.Repository.Interfaces;
+using Wpm.Management.Domain.Services.Interfaces;
 
 namespace Wpm.Infra.IoC
 {
@@ -20,6 +25,10 @@ namespace Wpm.Infra.IoC
                 options.UseSqlite(connectionString));
 
             services.AddScoped<IManagementRepository, ManagementRepository>();
+            services.AddScoped<IBreedService, BreedService>();
+            services.AddScoped<ICommandHandler<SetWeightCommand>, SetWeightCommandHandler>();
+
+            services.AddScoped<ManagementApplicationService>();
 
             return services;
         }

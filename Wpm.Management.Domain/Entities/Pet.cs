@@ -26,11 +26,13 @@ namespace Wpm.Management.Domain
             Color = color;
             BreedId = breedId;
         }
-        public void SetWeight(Weight weight,IBreedService breedService)
+        public void SetWeight(Weight weight, IBreedService breedService)
         {
             Weight = weight;
             SetWeihgtClass(breedService);
         }
+        // O SetWeight exemplifica o Recurring Pattern porque cada vez que um peso é atribuído,
+        // a regra de negócio associada (cálculo da WeightClass) é reexecutada automaticamente.
         private void SetWeihgtClass(IBreedService breedService)
         {
             var desiredBreed = breedService.GetBreed(BreedId.Value);
@@ -45,7 +47,6 @@ namespace Wpm.Management.Domain
                 _ when Weight.Value < from => WeihgtClass.Underweight,
                 _ when Weight.Value > to => WeihgtClass.Overweight,
                 _ => WeihgtClass.Ideal
-
             };
         }
     }
